@@ -30,17 +30,14 @@ if __name__=="__main__":
         content_encoded = post_ns.find('.//content:encoded', ns)
         post['content'] = unescape(content_encoded.text) if content_encoded is not None and content_encoded.text is not None else ''
         post_pub_date_text = post_ns.find('pubDate').text
-        # if " 2013 " not in post_pub_date_text: continue
         post_pub_date_time = datetime.strptime(post_pub_date_text, "%a, %d %b %Y %H:%M:%S %z")
         post_pub_date = post_pub_date_time.strftime("%Y-%m-%dT%H:%M:%S.000Z")
         post['frontmatter']['pubDate'] = post_pub_date_time
         post_link = post_ns.find('link').text
         post_link = post_link[post_link.find("/",7)+1:]
         post_link = post_link[:-1]
-        print(post_link)
         post_path, post_nicename = post_link.rsplit("/", 1)
 
-        # post['frontmatter']['slug'] = post_link
         post_categories = []
         for category in post_ns.findall('.//category[@domain="category"]'):
             post_categories.append(category.get('nicename'))
