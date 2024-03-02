@@ -22,14 +22,19 @@ python XML2Tags.py /path/to/your-wordpress-export.xml /path/to/your/astro/src/co
 python XML2Categories.py /path/to/your-wordpress-export.xml /path/to/your/astro/src/content/categories
 python XML2Authors.py /path/to/your-wordpress-export.xml /path/to/your/astro/src/content/authors
 python XML2Posts.py /path/to/your-wordpress-export.xml /path/to/your/astro/src/content/posts
+python XML2Pages.py /path/to/your-wordpress-export.xml /path/to/your/astro/src/content/posts
 ```
+
+NOTES:
+
+* If there is a "blogger_author" post metadata, uses that as the author; ensure you actually have
+  such an author in the system!
 
 TODO
 
 1. Add some tests
-2. Add XML2Pages.py (with sort order, parent/children, etc.)
-3. Also include some sample pages/layouts for folks to use?
-4. Keep going and show folks how to add/edit posts?
+2. Also include some sample pages/layouts for folks to use?
+3. Keep going and show folks how to add/edit posts?
 
 EXAMPLE ASTRO SCHEMA
 
@@ -54,6 +59,8 @@ const pagesCollection = defineCollection({
                 title: z.string(),
                 isPublished: z.boolean(),
                 sortOrder: z.number(),
+                pubDate: z.date(),
+                author: reference('authors'),
         }),
 });
 
@@ -61,6 +68,7 @@ const categoryCollection = defineCollection({
   type: 'data',
   schema: z.object({
     name: z.string(),
+    parent: reference('categories').nullable(),
   })
 });
 
@@ -76,8 +84,8 @@ const authorCollection = defineCollection({
   schema: z.object({
     email: z.string().email(),
     display_name: z.string(),
-    last_name: z.string(),
-    first_name: z.string(),
+    last_name: z.string().nullable(),
+    first_name: z.string().nullable(),
   })
 });
 
