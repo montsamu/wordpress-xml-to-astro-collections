@@ -26,6 +26,10 @@ if __name__=="__main__":
         post['frontmatter']['title'] = post_ns.find('title').text
         if post['frontmatter']['title'] is None: post['frontmatter']['title'] = 'Untitled'
         post_author = post_ns.find('.//dc:creator', ns).text
+        postmeta_ns = post_ns.findall('.//wp:postmeta', ns)
+        for postmeta in postmeta_ns:
+            if postmeta.find('.//wp:meta_key', ns).text == 'blogger_author':
+                post_author = postmeta.find('.//wp:meta_value', ns).text
         post['frontmatter']['author'] = post_author
         content_encoded = post_ns.find('.//content:encoded', ns)
         post['content'] = unescape(content_encoded.text) if content_encoded is not None and content_encoded.text is not None else ''
@@ -34,7 +38,7 @@ if __name__=="__main__":
         post_pub_date = post_pub_date_time.strftime("%Y-%m-%dT%H:%M:%S.000Z")
         post['frontmatter']['pubDate'] = post_pub_date_time
         post_link = post_ns.find('link').text
-        post_link = post_link[post_link.find("/",7)+1:]
+        post_link = post_link[post_link.find("/",8)+1:]
         post_link = post_link[:-1]
         post_path, post_nicename = post_link.rsplit("/", 1)
 
