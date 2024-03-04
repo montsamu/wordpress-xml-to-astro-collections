@@ -37,10 +37,16 @@ NOTES:
 
 TODO
 
-1. Add some tests
-2. Also include some sample pages/layouts for folks to use directly, instead of just in the README?
-3. Include an RSS example?
-4. Keep going and show folks how to add/edit posts?
+1. During migration of posts and pages, look for hardcoded links to "fulldomain.com" and cut to relative links?
+   (NOTE: it is easy to do this after migration in, e.g. VS Code)
+1. During migration of posts and pages, look for img/links to "yoursite.content.wordpress.com" and change to use local static?
+   (NOTE: it is easy to do this after migration in, e.g. VS Code)
+1. During migration of posts and pages, look for "Certain HTML content" (above) and trim?
+   (NOTE: it is not likely that such behavior as "indent is a code block" is intended in Wordpress HTML source)
+1. Add some tests?
+1. Also include some sample pages/layouts for folks to use directly, instead of just in the README?
+1. Include an RSS example?
+1. Keep going and show folks how to add/edit posts?
 
 EXAMPLE ASTRO SCHEMA
 
