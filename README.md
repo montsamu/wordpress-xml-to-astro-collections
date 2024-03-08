@@ -31,6 +31,9 @@ NOTES:
   such an author in the system! (This is because I have a Wordpress site that migrated from a Blogger site...)
 * Certain HTML content does not render well when included as markdown content; especially look out for
   deep indents (markdown thinks this is `code`)
+* Certain other content does not render well either; things like "caption" square-bracket directives, and
+  certain deeply weird img attributes with curly braces in them break those images pretty well
+* Yet more content does not do too great, either, the "new" Wordpress blocks columns for example
 * I didn't elect to retain the pages "parent" as a field in the schema, as the filesystem hierarchy suffices
 * The data schemas do not explicitly include an 'id' field as this is implicitly created by AstroJS
   from the filename
@@ -47,6 +50,7 @@ TODO
 1. Also include some sample pages/layouts for folks to use directly, instead of just in the README?
 1. Include an RSS example?
 1. Keep going and show folks how to add/edit posts?
+1. Would it be better to just use an existing Wordpress-to-Markdown migration?
 
 EXAMPLE ASTRO SCHEMA
 
